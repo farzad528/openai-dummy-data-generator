@@ -12,8 +12,7 @@ This is a repository built with Node.JS that provides the ability to seamlessly 
 
 ### Prerequisites
 
-- Semantic Configuration's for each language you wish to search
-- Multilingual fields (e.g. title_en, content_en, title_fr, content_fr); See [Create an index for multiple languages in Azure Cognitive Search](https://learn.microsoft.com/en-us/azure/search/search-language-support)
+- OpenAI API
 - Node (I'm using version 16.x)
 
 Once you've met all the pre-requisites, you'll need to follow these steps:
