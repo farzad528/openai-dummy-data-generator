@@ -1,10 +1,14 @@
 import axios from "axios";
 import { faker } from "@faker-js/faker";
+import dotenv from "dotenv";
+dotenv.config({ path: "../.env" });
 
 // Define the OpenAI API endpoint and API key
-const endpoint =
-  "https://delegenz-openai.openai.azure.com/openai/deployments/text-davinci-002/completions?api-version=2022-12-01";
-const apiKey = "07f7381339e1419da636ff5171950888";
+const endpoint = `https://${process.env.OPENAI_SERVICE_NAME}.openai.azure.com/openai/deployments/${process.env.DEPLOYMENT_NAME}/completions?api-version=2022-12-01`;
+const apiKey = process.env.OPENAI_API_KEY;
+const count = process.env.DATASET_COUNT
+  ? parseInt(process.env.DATASET_COUNT, 10)
+  : 5;
 
 // Define the interface for the oil and gas equipment object
 interface Equipment {
@@ -52,7 +56,7 @@ async function generateData(numEntries: number): Promise<Equipment[]> {
 }
 
 // Call the function to generate the data
-generateData(100).then((equipmentData) => {
+generateData(count).then((equipmentData) => {
   // Log the generated data to the console
   console.log(JSON.stringify(equipmentData, null, 2));
 });

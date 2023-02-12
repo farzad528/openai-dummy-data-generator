@@ -14,9 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const faker_1 = require("@faker-js/faker");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config({ path: "../.env" });
 // Define the OpenAI API endpoint and API key
-const endpoint = "https://delegenz-openai.openai.azure.com/openai/deployments/text-davinci-002/completions?api-version=2022-12-01";
-const apiKey = "07f7381339e1419da636ff5171950888";
+const endpoint = `https://${process.env.OPENAI_SERVICE_NAME}.openai.azure.com/openai/deployments/${process.env.DEPLOYMENT_NAME}/completions?api-version=2022-12-01`;
+const apiKey = process.env.OPENAI_API_KEY;
+const count = process.env.DATASET_COUNT
+    ? parseInt(process.env.DATASET_COUNT, 10)
+    : 5;
 // Function that generates the dummy data
 function generateData(numEntries) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -48,7 +53,7 @@ function generateData(numEntries) {
     });
 }
 // Call the function to generate the data
-generateData(100).then((equipmentData) => {
+generateData(count).then((equipmentData) => {
     // Log the generated data to the console
     console.log(JSON.stringify(equipmentData, null, 2));
 });
